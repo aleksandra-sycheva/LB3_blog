@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LB3_blog;
+namespace LB3_blog.Models;
 
 public partial class Post
 {
