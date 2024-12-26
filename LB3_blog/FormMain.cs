@@ -38,15 +38,26 @@ namespace LB3_blog
 
         private void DataGridViewUsers_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.db != null)
+            if (this.dataGridViewUsers.CurrentRow != null)
             {
-                var user = (User)this.dataGridViewUsers.CurrentRow.DataBoundItem;
-
-                if (user != null)
+                if (this.db != null)
                 {
-                    this.db.Entry(user).Collection(e => e.Posts).Load();
-                    this.dataGridViewPosts.DataSource = user.Posts;
+                    var user = (User)this.dataGridViewUsers.CurrentRow.DataBoundItem;
+
+                    if (user != null)
+                    {
+                        this.db.Entry(user).Collection(e => e.Posts).Load();
+                        this.dataGridViewPosts.DataSource = user.Posts;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не удалось получить данные пользователя. Пожалуйста, выберите другого пользователя.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Не удалось получить данные пользователя. Пожалуйста, выберите другого пользователя.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
